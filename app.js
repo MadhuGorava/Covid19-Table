@@ -66,4 +66,37 @@ Express.post("/districts/", async (request, response) => {
   response.send("District Successfully Added");
 });
 
+Express.get("/districts/:districtId/", async (request, response) => {
+  const { districtId } = request.params;
+  const getDistrictDetailQuery = `select * from district where district_id = ${districtId}`;
+  const districtDbResponse = await db.get(getDistrictDetailQuery);
+  response.send(convertDbObjectToResponseObject(districtDbResponse));
+});
+
+Express.delete("/districts/:districtId/", async (request, response) => {
+  const { districtId } = request.params;
+  const getDistrictDetailQuery = `delete from district where district_id = ${districtId}`;
+  const districtDbResponse = await db.get(getDistrictDetailQuery);
+  response.send("District Removed");
+});
+
+Express.put("/districts/:districtId/", async (request, response) => {
+  const { districtId } = request.params;
+  const { districtName, stateId, cases, cured, active, deaths } = request.body;
+  const postPlayerQuery = `
+  update
+    district
+  set
+    district_name = '${districtName}', 
+    state_id = ${stateId}, 
+    cases = ${cases}, 
+    cured = ${cured}, 
+    active = ${active}, 
+    deaths = ${deaths}
+    where 
+        district_id = ${districtId}`;
+  const player = await db.run(postPlayerQuery);
+  response.send("District Details Updated");
+});
+
 module.exports = Express;

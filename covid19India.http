@@ -18,24 +18,43 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/states/8/
 
+{
+  "stateId": 8,
+  "stateName": "Delhi",
+  "population": 16787941
+}
+
 ###
 
-PUT http://localhost:3000/states/:5/
+PUT http://localhost:3000/districts/300/
 
 
 {
-  "directorId": 24,
-  "movieName": "Thor",
-  "leadActor": "Christopher Hemsworth"
+  "districtName": "Nadia",
+  "stateId": 3,
+  "cases": 9628,
+  "cured": 6524,
+  "active": 3000,
+  "deaths": 104
 }
 
 
 ###
 
-DELETE http://localhost:3000/states/10/
+DELETE http://localhost:3000/districts/300/
 
 ###
-GET http://localhost:3000/directors/
+GET http://localhost:3000/districts/322/
+
+{
+  districtId: 322,
+  districtName: "Haveri",
+  stateId: 36,
+  cases: 2816,
+  cured: 2424,
+  active: 172,
+  deaths: 220,
+}
 
 ###
 
