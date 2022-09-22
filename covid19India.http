@@ -27,6 +27,7 @@ GET http://localhost:3000/states/8/
 ###
 
 PUT http://localhost:3000/districts/300/
+Content-Type: application/json
 
 
 {
@@ -58,4 +59,19 @@ GET http://localhost:3000/districts/322/
 
 ###
 
-GET http://localhost:3000/directors/5/states/
+GET http://localhost:3000/states/36/stats/
+
+{
+  totalCases: 724355,
+  totalCured: 615324,
+  totalActive: 99254,
+  totalDeaths: 9777
+}
+
+###
+
+GET http://localhost:3000/districts/2/details/
+
+{
+  stateName: "Maharashtra"
+}

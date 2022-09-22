@@ -38,6 +38,11 @@ const convertDbObjectToResponseObject = (dbObject) => {
     deaths: dbObject.deaths,
   };
 };
+const convertStateToDistrict = (objectDb) => {
+  return {
+    stateName: objectDb.district_name,
+  };
+};
 
 Express.get("/states/", async (request, response) => {
   const movieName = request.params;
@@ -98,5 +103,22 @@ Express.put("/districts/:districtId/", async (request, response) => {
   const player = await db.run(postPlayerQuery);
   response.send("District Details Updated");
 });
+Express.get("/states/:stateId/stats/", async (request, response) => {
+  const { stateId } = request.params;
+  const getMovieDetailQuery = `select sum(cases) as totalCases, sum(cured) as totalCured, sum(active) as totalActive, sum(deaths) as totalDeaths from district where state_id = ${stateId}`;
+  const movieDbResponse = await db.get(getMovieDetailQuery);
+  response.send(movieDbResponse);
+});
 
+Express.get("/districts/:districtId/details/", async (request, response) => {
+  const { districtId } = request.params;
+  const getMovieDetailQuery = `SELECT 
+    state.state_name
+  FROM 
+    district INNER JOIN state ON state.state_id=district.state_id
+  WHERE 
+    district_id=${districtId};`;
+  const movieDbResponse = await db.get(getMovieDetailQuery);
+  response.send(convertDbObjectToResponseObject(movieDbResponse));
+});
 module.exports = Express;
