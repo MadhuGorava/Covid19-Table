@@ -1,0 +1,42 @@
+GET http://localhost:3000/states/
+
+###
+
+POST http://localhost:3000/districts/
+Content-Type: application/json
+
+  
+{
+  "districtName": "Bagalkot",
+  "stateId": 3,
+  "cases": 2323,
+  "cured": 2000,
+  "active": 315,
+  "deaths": 8
+}
+
+###
+GET http://localhost:3000/states/8/
+
+###
+
+PUT http://localhost:3000/states/:5/
+
+
+{
+  "directorId": 24,
+  "movieName": "Thor",
+  "leadActor": "Christopher Hemsworth"
+}
+
+
+###
+
+DELETE http://localhost:3000/states/10/
+
+###
+GET http://localhost:3000/directors/
+
+###
+
+GET http://localhost:3000/directors/5/states/
